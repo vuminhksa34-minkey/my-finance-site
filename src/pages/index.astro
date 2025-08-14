@@ -1,4 +1,37 @@
 ---
+import PriceTicker from "../components/PriceTicker.jsx";
+---
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thông tin tài chính tổng hợp</title>
+    <meta name="description" content="Cập nhật tin tức, trái phiếu, cổ phiếu và giá realtime." />
+  </head>
+  <body>
+    <h1>Trang tổng hợp tài chính</h1>
+
+    <section>
+      <h2>Giá cổ phiếu</h2>
+      <PriceTicker client:visible />
+    </section>
+
+    <section>
+      <h2>Trái phiếu</h2>
+      <ul>
+        <li>Trái phiếu chính phủ 10 năm: <strong>3.52%</strong></li>
+        <li>Trái phiếu doanh nghiệp: <strong>8.30%</strong></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tin tức</h2>
+      <ul>
+        <li><a href="#">FED giữ nguyên lãi suất</a></li>
+        <li><a href="#">Giá dầu giảm, thị trường lo ngại</a></li>
+      </ul>
+    </section>
+  </body>
+</html>---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
