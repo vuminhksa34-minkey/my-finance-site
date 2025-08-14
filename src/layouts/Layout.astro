@@ -1,22 +1,27 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import Layout from "../layouts/Layout.astro";
+import PriceTicker from "../components/PriceTicker.jsx";
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<Layout title="Trang chủ" description="Tin tức và dữ liệu chứng khoán, trái phiếu, cổ phiếu realtime.">
+  <section class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">📊 Giá cổ phiếu</h2>
+    <PriceTicker client:visible />
+  </section>
+
+  <section class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">🏦 Trái phiếu</h2>
+    <ul class="list-disc pl-5 text-sm">
+      <li>Trái phiếu chính phủ 10 năm: <strong>3.52%</strong></li>
+      <li>Trái phiếu doanh nghiệp: <strong>8.30%</strong></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold mb-2">📰 Tin tức</h2>
+    <ul class="list-disc pl-5 text-sm text-blue-600">
+      <li><a href="#">FED giữ nguyên lãi suất</a></li>
+      <li><a href="#">Giá dầu giảm, thị trường lo ngại</a></li>
+    </ul>
+  </section>
+</Layout>
