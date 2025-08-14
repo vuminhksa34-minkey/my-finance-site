@@ -1,27 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PriceTicker from "../components/PriceTicker.jsx";
+import "../styles/global.css";
 ---
 
-<Layout title="Trang chủ" description="Tin tức và dữ liệu chứng khoán, trái phiếu, cổ phiếu realtime.">
-  <section class="mb-6">
-    <h2 class="text-lg font-semibold mb-2">📊 Giá cổ phiếu</h2>
-    <PriceTicker client:visible />
-  </section>
-
-  <section class="mb-6">
-    <h2 class="text-lg font-semibold mb-2">🏦 Trái phiếu</h2>
-    <ul class="list-disc pl-5 text-sm">
-      <li>Trái phiếu chính phủ 10 năm: <strong>3.52%</strong></li>
-      <li>Trái phiếu doanh nghiệp: <strong>8.30%</strong></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2 class="text-lg font-semibold mb-2">📰 Tin tức</h2>
-    <ul class="list-disc pl-5 text-sm text-blue-600">
-      <li><a href="#">FED giữ nguyên lãi suất</a></li>
-      <li><a href="#">Giá dầu giảm, thị trường lo ngại</a></li>
-    </ul>
-  </section>
-</Layout>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thông tin tài chính</title>
+  </head>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <main class="max-w-3xl mx-auto p-6">
+      <slot />
+    </main>
+  </body>
+</html>
