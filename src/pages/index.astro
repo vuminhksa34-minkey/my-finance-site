@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import PriceTicker from "../components/PriceTicker.jsx";
 import NewsFeed from "../components/NewsFeed.jsx";
+import InternationalMarket from "../components/InternationalMarket.jsx";
+import BondRates from "../components/BondRates.jsx";
 ---
 
 <Layout>
@@ -16,16 +18,7 @@ import NewsFeed from "../components/NewsFeed.jsx";
     
     <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold mb-4 text-white">🏦 Trái phiếu</h2>
-      <div class="text-lg">
-        <div class="flex justify-between items-center mb-2">
-          <span>Chính phủ 10 năm:</span>
-          <strong class="text-green-400">3.52%</strong>
-        </div>
-        <div class="flex justify-between items-center">
-          <span>Doanh nghiệp:</span>
-          <strong class="text-green-400">8.30%</strong>
-        </div>
-      </div>
+      <BondRates client:visible />
     </section>
   </div>
 
@@ -36,21 +29,8 @@ import NewsFeed from "../components/NewsFeed.jsx";
     </section>
 
     <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-semibold mb-4 text-white">📚 Chuyên đề</h2>
-      <ul class="space-y-4">
-        <li class="border-b border-gray-700 pb-4">
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Tương lai của ngành công nghiệp xe điện</a>
-          <p class="text-gray-400 text-sm mt-1">Một bài phân tích sâu sắc về những thách thức và cơ hội cho xe điện trong thập kỷ tới...</p>
-        </li>
-        <li class="border-b border-gray-700 pb-4">
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Lạm phát và chính sách tiền tệ trong thế giới hậu đại dịch</a>
-          <p class="text-gray-400 text-sm mt-1">Các ngân hàng trung ương trên toàn thế giới đang đối mặt với một bài toán khó...</p>
-        </li>
-        <li>
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Sự trỗi dậy của các thị trường mới nổi</a>
-          <p class="text-gray-400 text-sm mt-1">Liệu các nền kinh tế mới nổi có thể trở thành động lực tăng trưởng mới cho kinh tế toàn cầu?</p>
-        </li>
-      </ul>
+      <h2 class="text-2xl font-semibold mb-4 text-white">🌍 Thị trường quốc tế</h2>
+      <InternationalMarket client:visible />
     </section>
   </div>
 </Layout>
