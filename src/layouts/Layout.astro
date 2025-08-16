@@ -7,10 +7,31 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thông tin tài chính</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-gray-100 text-gray-800 font-sans">
-    <main class="max-w-3xl mx-auto p-6">
+  <body class="bg-gray-900 text-gray-100 font-sans">
+    <header class="bg-gray-800 shadow-md">
+      <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-xl font-bold text-white">FinanceSite</a>
+        <div>
+          <a href="/" class="text-gray-300 hover:text-white px-3 py-2">Trang chủ</a>
+          <a href="/news" class="text-gray-300 hover:text-white px-3 py-2">Tin tức</a>
+          <a href="/about" class="text-gray-300 hover:text-white px-3 py-2">Về chúng tôi</a>
+        </div>
+      </nav>
+    </header>
+    <main class="container mx-auto p-6">
       <slot />
     </main>
+    <footer class="bg-gray-800 mt-12">
+      <div class="container mx-auto px-6 py-4 text-center text-gray-400">
+        &copy; 2025 FinanceSite. All rights reserved.
+      </div>
+    </footer>
   </body>
 </html>
