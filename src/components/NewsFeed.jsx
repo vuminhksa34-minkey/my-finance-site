@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Parser from 'rss-parser';
 
 const NewsFeed = () => {
   const [feed, setFeed] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const parser = new Parser();
     const fetchFeed = async () => {
       try {
-        // Note: Some RSS feeds may not have the correct CORS headers.
-        // If you encounter issues, you might need to use a CORS proxy.
-        const feed = await parser.parseURL('https://vnexpress.net/rss/kinh-doanh.rss');
-        setFeed(feed);
+        const response = await fetch('/api/news');
+        if (!response.ok) {
+          throw new Error('Failed to fetch news');
+        }
+        const data = await response.json();
+        setFeed(data);
       } catch (error) {
-        console.error('Error fetching or parsing RSS feed:', error);
+        console.error('Error fetching news:', error);
         setError('Không thể tải tin tức. Vui lòng thử lại sau.');
       }
     };
