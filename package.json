@@ -14,7 +14,8 @@
     "@types/react-dom": "^19.1.7",
     "astro": "^5.12.9",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "rss-parser": "^3.13.0"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",

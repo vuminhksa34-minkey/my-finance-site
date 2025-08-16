@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PriceTicker from "../components/PriceTicker.jsx";
+import NewsFeed from "../components/NewsFeed.jsx";
 ---
 
 <Layout>
@@ -31,20 +32,7 @@ import PriceTicker from "../components/PriceTicker.jsx";
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
     <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold mb-4 text-white">📰 Tin tức mới nhất</h2>
-      <ul class="space-y-4">
-        <li class="border-b border-gray-700 pb-4">
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">FED giữ nguyên lãi suất, thị trường chứng khoán phản ứng tích cực</a>
-          <p class="text-gray-400 text-sm mt-1">Thị trường đã có một phiên giao dịch đầy biến động sau quyết định của FED...</p>
-        </li>
-        <li class="border-b border-gray-700 pb-4">
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Giá dầu giảm mạnh do lo ngại về suy thoái kinh tế toàn cầu</a>
-          <p class="text-gray-400 text-sm mt-1">Giá dầu thô đã giảm hơn 5% trong phiên giao dịch hôm nay...</p>
-        </li>
-        <li>
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Cổ phiếu công nghệ dẫn dắt đà tăng trưởng của VN-Index</a>
-          <p class="text-gray-400 text-sm mt-1">Nhóm cổ phiếu công nghệ đã có một phiên bùng nổ, giúp VN-Index tăng điểm mạnh...</p>
-        </li>
-      </ul>
+      <NewsFeed client:visible />
     </section>
 
     <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
