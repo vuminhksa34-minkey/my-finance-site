@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 import yfinance as yf
 from flask_cors import CORS
+import feedparser
 
 app = Flask(__name__)
 CORS(app) # Enable CORS for all routes
@@ -69,3 +70,19 @@ def get_market_data():
         data["vnindex"] = {"price": "N/A", "change": "N/A"}
 
     return jsonify(data)
+
+@app.route('/api/news-data')
+def get_news_data():
+    try:
+        feed = feedparser.parse('https://vnexpress.net/rss/kinh-doanh.rss')
+        news_items = []
+        for entry in feed.entries:
+            news_items.append({
+                "title": entry.title,
+                "link": entry.link,
+                "contentSnippet": entry.summary # or entry.description
+            })
+        return jsonify({"items": news_items})
+    except Exception as e:
+        print(f"Error fetching news: {e}")
+        return jsonify({"error": "Failed to fetch news"}), 500

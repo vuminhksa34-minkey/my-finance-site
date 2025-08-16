@@ -7,7 +7,7 @@ const NewsFeed = () => {
   useEffect(() => {
     const fetchFeed = async () => {
       try {
-        const response = await fetch('/api/news');
+        const response = await fetch('/api/news-data');
         if (!response.ok) {
           throw new Error('Failed to fetch news');
         }
