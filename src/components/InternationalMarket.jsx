@@ -7,69 +7,57 @@ export default function InternationalMarket() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        // Fetch USD/VND
-        const usdVndResponse = await fetch(
-          `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=VND&apikey=${API_KEY}`
-        );
-        const usdVndData = await usdVndResponse.json();
-        const usdVndRate = usdVndData["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+      const usdVndPromise = fetch(
+        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=VND&apikey=${API_KEY}`
+      ).then(res => res.json());
 
-        // Fetch Bitcoin (BTC/USD)
-        const btcUsdResponse = await fetch(
-          `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_EXCHANGE_RATE&symbol=BTC&market=USD&apikey=${API_KEY}`
-        );
-        const btcUsdData = await btcUsdResponse.json();
-        const btcUsdRate = btcUsdData["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+      const btcUsdPromise = fetch(
+        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=${API_KEY}`
+      ).then(res => res.json());
 
-        setData({
-          sp500: {
-            price: "4418.23", // Static for now
-            change: "+1.11%", // Static for now
-            chart: "up",
-          },
-          nasdaq: {
-            price: "13743.61", // Static for now
-            change: "+1.70%", // Static for now
-            chart: "up",
-          },
-          usdVnd: {
-            price: parseFloat(usdVndRate).toFixed(2),
-            change: "+0.25%", // Alpha Vantage doesn't provide change for this endpoint directly
-            chart: "up",
-          },
-          bitcoin: {
-            price: parseFloat(btcUsdRate).toFixed(2),
-            change: "+1.50%", // Alpha Vantage doesn't provide change for this endpoint directly
-            chart: "up",
-          },
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // Fallback to static data or show error message
-        setData({
-          sp500: {
-            price: "4418.23",
-            change: "+1.11%",
-            chart: "up",
-          },
-          nasdaq: {
-            price: "13743.61",
-            change: "+1.70%",
-            chart: "up",
-          },
-          usdVnd: {
-            price: "24210",
-            change: "+0.25%",
-            chart: "up",
-          },
-          bitcoin: {
-            price: "60000",
-            change: "+1.50%",
-            chart: "up",
-          },
-        });
+      const [usdVndResult, btcUsdResult] = await Promise.allSettled([
+        usdVndPromise,
+        btcUsdPromise,
+      ]);
+
+      const newData = {
+        sp500: {
+          price: "4418.23", // Static for now
+          change: "+1.11%", // Static for now
+          chart: "up",
+        },
+        nasdaq: {
+          price: "13743.61", // Static for now
+          change: "+1.70%", // Static for now
+          chart: "up",
+        },
+        usdVnd: {
+          price: "24210",
+          change: "+0.25%",
+          chart: "up",
+        },
+        bitcoin: {
+          price: "60000",
+          change: "+1.50%",
+          chart: "up",
+        },
+      };
+
+      if (usdVndResult.status === "fulfilled" && usdVndResult.value["Realtime Currency Exchange Rate"]) {
+        const usdVndRate = usdVndResult.value["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+        newData.usdVnd.price = parseFloat(usdVndRate).toFixed(2);
+      } else {
+        console.error("Failed to fetch USD/VND data:", usdVndResult.reason);
       }
+
+      if (btcUsdResult.status === "fulfilled" && btcUsdResult.value["Realtime Currency Exchange Rate"]) {
+        const btcUsdRate = btcUsdResult.value["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+        newData.bitcoin.price = parseFloat(btcUsdRate).toFixed(2);
+      } else {
+        console.error("Failed to fetch Bitcoin data:", btcUsdResult.reason);
+      }
+
+      setData(newData);
     };
 
     fetchData();
