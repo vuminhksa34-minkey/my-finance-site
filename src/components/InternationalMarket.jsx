@@ -7,7 +7,7 @@ export default function InternationalMarket() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/market-data");
+        const response = await fetch("/api/market-data");
         const backendData = await response.json();
 
         const formatChange = (change) => {
