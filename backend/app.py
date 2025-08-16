@@ -56,6 +56,18 @@ def get_market_data():
         print(f"Error fetching Bitcoin: {e}")
         data["bitcoin"] = {"price": "N/A", "change": "N/A"}
 
+    try:
+        # VN-Index
+        vnindex = yf.Ticker("^VNINDEX.VN")
+        vnindex_info = vnindex.info
+        data["vnindex"] = {
+            "price": vnindex_info.get("regularMarketPrice"),
+            "change": vnindex_info.get("regularMarketChangePercent"),
+        }
+    except Exception as e:
+        print(f"Error fetching VN-Index: {e}")
+        data["vnindex"] = {"price": "N/A", "change": "N/A"}
+
     return jsonify(data)
 
 if __name__ == '__main__':
