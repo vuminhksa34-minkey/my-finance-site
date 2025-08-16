@@ -3,61 +3,67 @@ import { useEffect, useState } from "react";
 
 export default function InternationalMarket() {
   const [data, setData] = useState(null);
-  const API_KEY = "K2HHUTXWWEJMZQL5";
 
   useEffect(() => {
     const fetchData = async () => {
-      const usdVndPromise = fetch(
-        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=VND&apikey=${API_KEY}`
-      ).then(res => res.json());
+      try {
+        const response = await fetch("http://localhost:5000/api/market-data");
+        const backendData = await response.json();
 
-      const btcUsdPromise = fetch(
-        `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=${API_KEY}`
-      ).then(res => res.json());
+        const formatChange = (change) => {
+          if (change === "N/A") return "N/A";
+          const sign = change > 0 ? "+" : "";
+          return `${sign}${change.toFixed(2)}%`;
+        };
 
-      const [usdVndResult, btcUsdResult] = await Promise.allSettled([
-        usdVndPromise,
-        btcUsdPromise,
-      ]);
-
-      const newData = {
-        sp500: {
-          price: "4418.23", // Static for now
-          change: "+1.11%", // Static for now
-          chart: "up",
-        },
-        nasdaq: {
-          price: "13743.61", // Static for now
-          change: "+1.70%", // Static for now
-          chart: "up",
-        },
-        usdVnd: {
-          price: "24210",
-          change: "+0.25%",
-          chart: "up",
-        },
-        bitcoin: {
-          price: "60000",
-          change: "+1.50%",
-          chart: "up",
-        },
-      };
-
-      if (usdVndResult.status === "fulfilled" && usdVndResult.value["Realtime Currency Exchange Rate"]) {
-        const usdVndRate = usdVndResult.value["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
-        newData.usdVnd.price = parseFloat(usdVndRate).toFixed(2);
-      } else {
-        console.error("Failed to fetch USD/VND data:", usdVndResult.reason);
+        setData({
+          sp500: {
+            price: backendData.sp500.price ? backendData.sp500.price.toFixed(2) : "N/A",
+            change: formatChange(backendData.sp500.change),
+            chart: backendData.sp500.change > 0 ? "up" : "down",
+          },
+          nasdaq: {
+            price: backendData.nasdaq.price ? backendData.nasdaq.price.toFixed(2) : "N/A",
+            change: formatChange(backendData.nasdaq.change),
+            chart: backendData.nasdaq.change > 0 ? "up" : "down",
+          },
+          usdVnd: {
+            price: backendData.usdVnd.price ? backendData.usdVnd.price.toFixed(2) : "N/A",
+            change: formatChange(backendData.usdVnd.change),
+            chart: backendData.usdVnd.change > 0 ? "up" : "down",
+          },
+          bitcoin: {
+            price: backendData.bitcoin.price ? backendData.bitcoin.price.toFixed(2) : "N/A",
+            change: formatChange(backendData.bitcoin.change),
+            chart: backendData.bitcoin.change > 0 ? "up" : "down",
+          },
+        });
+      } catch (error) {
+        console.error("Error fetching data from backend:", error);
+        // Fallback to static data or show error message
+        setData({
+          sp500: {
+            price: "4418.23",
+            change: "+1.11%",
+            chart: "up",
+          },
+          nasdaq: {
+            price: "13743.61",
+            change: "+1.70%",
+            chart: "up",
+          },
+          usdVnd: {
+            price: "24210",
+            change: "+0.25%",
+            chart: "up",
+          },
+          bitcoin: {
+            price: "60000",
+            change: "+1.50%",
+            chart: "up",
+          },
+        });
       }
-
-      if (btcUsdResult.status === "fulfilled" && btcUsdResult.value["Realtime Currency Exchange Rate"]) {
-        const btcUsdRate = btcUsdResult.value["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
-        newData.bitcoin.price = parseFloat(btcUsdRate).toFixed(2);
-      } else {
-        console.error("Failed to fetch Bitcoin data:", btcUsdResult.reason);
-      }
-
-      setData(newData);
     };
 
     fetchData();
