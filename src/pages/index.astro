@@ -6,7 +6,7 @@ import PriceTicker from "../components/PriceTicker.jsx";
 <Layout>
   <h1 class="text-4xl font-bold mb-8 text-white">Tổng quan thị trường</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     
     <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold mb-4 text-white">📊 Giá cổ phiếu</h2>
@@ -26,8 +26,10 @@ import PriceTicker from "../components/PriceTicker.jsx";
         </div>
       </div>
     </section>
+  </div>
 
-    <section class="md:col-span-2 bg-gray-800 p-6 rounded-lg shadow-lg">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 class="text-2xl font-semibold mb-4 text-white">📰 Tin tức mới nhất</h2>
       <ul class="space-y-4">
         <li class="border-b border-gray-700 pb-4">
@@ -45,5 +47,22 @@ import PriceTicker from "../components/PriceTicker.jsx";
       </ul>
     </section>
 
+    <section class="bg-gray-800 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-white">📚 Chuyên đề</h2>
+      <ul class="space-y-4">
+        <li class="border-b border-gray-700 pb-4">
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Tương lai của ngành công nghiệp xe điện</a>
+          <p class="text-gray-400 text-sm mt-1">Một bài phân tích sâu sắc về những thách thức và cơ hội cho xe điện trong thập kỷ tới...</p>
+        </li>
+        <li class="border-b border-gray-700 pb-4">
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Lạm phát và chính sách tiền tệ trong thế giới hậu đại dịch</a>
+          <p class="text-gray-400 text-sm mt-1">Các ngân hàng trung ương trên toàn thế giới đang đối mặt với một bài toán khó...</p>
+        </li>
+        <li>
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">The Economist: Sự trỗi dậy của các thị trường mới nổi</a>
+          <p class="text-gray-400 text-sm mt-1">Liệu các nền kinh tế mới nổi có thể trở thành động lực tăng trưởng mới cho kinh tế toàn cầu?</p>
+        </li>
+      </ul>
+    </section>
   </div>
 </Layout>
