@@ -22,12 +22,12 @@ export default function BondRates() {
   const renderChart = (type) => {
     const color = type === "up" ? "text-green-400" : "text-red-400";
     return (
-      <svg width="100" height="30" className={`inline-block ml-4 ${color}`}>
+      <svg width="80" height="25" className={`inline-block ml-4 ${color}`}>
         <polyline
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          points={type === "up" ? "0,25 10,20 20,22 30,15 40,17 50,10 60,12 70,8 80,10 90,5 100,8" : "0,8 10,12 20,10 30,17 40,15 50,22 60,20 70,25 80,22 90,28 100,25"}
+          points={type === "up" ? "0,20 8,16 16,18 24,12 32,14 40,8 48,10 56,6 64,8 72,4 80,6" : "0,6 8,10 16,8 24,14 32,12 40,18 48,16 56,20 64,18 72,22 80,20"}
         />
       </svg>
     );
@@ -36,16 +36,16 @@ export default function BondRates() {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <div className="text-lg font-semibold">Chính phủ 10 năm</div>
+        <div className="text-base font-semibold">Chính phủ 10 năm</div>
         <div className="flex items-center">
-          <div className="text-lg font-bold text-green-400">{data.govBond.rate}</div>
+          <div className="text-base font-bold text-green-400">{data.govBond.rate}</div>
           {renderChart(data.govBond.chart)}
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className="text-lg font-semibold">Doanh nghiệp</div>
+        <div className="text-base font-semibold">Doanh nghiệp</div>
         <div className="flex items-center">
-          <div className="text-lg font-bold text-green-400">{data.corpBond.rate}</div>
+          <div className="text-base font-bold text-green-400">{data.corpBond.rate}</div>
           {renderChart(data.corpBond.chart)}
         </div>
       </div>
